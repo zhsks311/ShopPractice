@@ -23,4 +23,23 @@ public class BrandRepositoryImpl implements BrandRepository {
         }
         return Optional.ofNullable(lowestPriceBrand.getFirst());
     }
+
+    @Override
+    public Optional<Brand> findBrandByName(String brandName) {
+        return Optional.ofNullable(brandJPARepository.findByName(brandName));
+    }
+    @Override
+    public Optional<Brand> findBrandById(long brandName) {
+        return brandJPARepository.findById(brandName);
+    }
+
+    @Override
+    public Brand save(String name) {
+        return brandJPARepository.save(Brand.builder().name(name).build());
+    }
+
+    @Override
+    public void delete(long id) {
+        brandJPARepository.deleteById(id);
+    }
 }

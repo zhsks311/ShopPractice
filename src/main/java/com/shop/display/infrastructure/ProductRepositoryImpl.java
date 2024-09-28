@@ -38,4 +38,19 @@ public class ProductRepositoryImpl implements ProductRepository {
         return Optional.ofNullable(productJPARepository.findTopByCategoryOrderByPriceDesc(category));
     }
 
+    @Override
+    public Product save(Product product) {
+        return productJPARepository.save(product);
+    }
+
+    @Override
+    public Optional<Product> findProduct(long id) {
+        return productJPARepository.findById(id);
+    }
+
+    @Override
+    public void delete(long id) {
+        productJPARepository.deleteById(id);
+    }
+
 }

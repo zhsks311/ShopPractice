@@ -11,4 +11,10 @@ public interface ProductRepository {
     Optional<Product> findLowestPriceProductByCategory(Category category);
 
     Optional<Product> findHighestPriceProductByCategory(Category category);
+
+    Product save(Product product);
+
+    Optional<Product> findProduct(long id);
+
+    void delete(long id);
 }
