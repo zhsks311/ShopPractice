@@ -1,6 +1,7 @@
 package com.shop.display.infrastructure.jpa;
 
 import com.shop.display.domain.Brand;
+import com.shop.display.domain.Category;
 import com.shop.display.domain.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,4 +21,9 @@ public interface ProductJPARepository extends JpaRepository<Product, Long> {
     List<Product> findCategoryLowestPrices();
 
     List<Product> findProductsByBrand(Brand brand);
+
+    Product findTopByCategoryOrderByPriceAsc(Category category);
+
+    Product findTopByCategoryOrderByPriceDesc(Category category);
+
 }

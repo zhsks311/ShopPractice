@@ -7,8 +7,9 @@ import com.shop.display.interfaces.model.BrandLowestPriceResponse;
 import com.shop.display.interfaces.model.CategoryLowestPriceWrapperResponse;
 import org.springframework.stereotype.Service;
 
-import java.text.NumberFormat;
 import java.util.List;
+
+import static com.shop.display.ProductUtils.priceToStringWithComma;
 
 @Service
 public class LowestPriceService {
@@ -25,15 +26,16 @@ public class LowestPriceService {
         var lowestPriceByCategory = productRepository.findLowestPriceByCategory();
         return mapToCategoryLowestPriceWrapperResponse(lowestPriceByCategory);
     }
+
     private CategoryLowestPriceWrapperResponse mapToCategoryLowestPriceWrapperResponse(List<Product> products) {
         var responses = products.stream()
-                               .map(product -> new CategoryLowestPriceWrapperResponse.CategoryLowestPriceResponse(
-                                       product.getCategory(), product.getBrandName(),
-                                       priceToStringWithComma(product.getPrice())))
-                               .toList();
+                                .map(product -> new CategoryLowestPriceWrapperResponse.CategoryLowestPriceResponse(
+                                        product.getCategory(), product.getBrandName(),
+                                        product.getPriceStringWithComma()))
+                                .toList();
         long totalPrice = products.stream()
-                         .map(Product::getPrice)
-                         .reduce(Long::sum)
+                                  .map(Product::getPrice)
+                                  .reduce(Long::sum)
                          .orElse(0L);
         return new CategoryLowestPriceWrapperResponse(responses, priceToStringWithComma(totalPrice));
     }
@@ -53,7 +55,7 @@ public class LowestPriceService {
         var categoryPrices
                 = products.stream()
                           .map(product -> new BrandLowestPriceResponse.CategoryPrice(product.getCategory(),
-                                                                                     priceToStringWithComma(product.getPrice())))
+                                                                                     product.getPriceStringWithComma()))
                           .toList();
         long totalPrice = products.stream()
                                   .map(Product::getPrice)
@@ -67,8 +69,4 @@ public class LowestPriceService {
                                                     .build());
     }
 
-    private String priceToStringWithComma(long price) {
-        return NumberFormat.getIntegerInstance()
-                           .format(price);
-    }
 }

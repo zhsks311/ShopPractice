@@ -67,4 +67,26 @@ class ProductJPARepositoryIntegrationTest {
         assertThat(result).isNotNull();
         assertThat(result).isNotEmpty();
     }
+
+    @Test
+    void findTopByCategoryOrderByPriceAsc() {
+        // when
+        var result = productJPARepository.findTopByCategoryOrderByPriceAsc(TOPS);
+
+        // then
+        assertThat(result).isNotNull();
+        assertThat(result.getCategory()).isEqualTo(TOPS);
+        assertThat(result.getPrice()).isEqualTo(10000);
+    }
+
+    @Test
+    void findTopByCategoryOrderByPriceDesc() {
+        // when
+        var result = productJPARepository.findTopByCategoryOrderByPriceDesc(TOPS);
+
+        // then
+        assertThat(result).isNotNull();
+        assertThat(result.getCategory()).isEqualTo(TOPS);
+        assertThat(result.getPrice()).isEqualTo(11400);
+    }
 }

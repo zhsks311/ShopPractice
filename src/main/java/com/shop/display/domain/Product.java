@@ -17,6 +17,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import static com.shop.display.ProductUtils.priceToStringWithComma;
+
 @Builder
 @Getter
 @Entity
@@ -46,6 +48,10 @@ public class Product {
 
     public String getBrandName() {
         return brand.getName();
+    }
+
+    public String getPriceStringWithComma() {
+        return priceToStringWithComma(this.getPrice());
     }
 }
 
