@@ -106,7 +106,9 @@
 ### IntelliJ 기준 테스트 방법
 
 - 테스트 파일 / 테스트 패키지 오른쪽 클릭 -> Run Tests
-- 통합테스트 실행 : 터미널에서 ./gradlew integrationTest
+- 터미널에서
+  - 테스트 실행 : ./gradlew test
+  - 통합테스트 실행 : ./gradlew integrationTest
 
 ## 추가정보
 
