@@ -4,4 +4,6 @@ import java.util.List;
 
 public interface ProductRepository {
     List<Product> findLowestPriceByCategory();
+
+    List<Product> findProductsByBrandId(Brand brandId);
 }
