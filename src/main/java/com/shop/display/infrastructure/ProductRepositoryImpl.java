@@ -29,6 +29,11 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     @Override
+    public boolean isProductsExistByBrandId(Brand brand) {
+        return productJPARepository.existsByBrand(brand);
+    }
+
+    @Override
     public Optional<Product> findLowestPriceProductByCategory(Category category) {
         return Optional.ofNullable(productJPARepository.findTopByCategoryOrderByPriceAsc(category));
     }

@@ -27,8 +27,9 @@ public class ProductController {
     }
 
     @PostMapping(V1_PREFIX + "/products/{id}")
-    public CUDResponse updateProduct(@PathVariable Long id, @Valid @RequestBody ProductCommand command) {
-        productService.update(id ,command);
+    public CUDResponse updateProduct(@PathVariable Long id,
+                                     @Valid @RequestBody ProductCommand command) {
+        productService.update(id, command);
         return new CUDResponse("Product updated successfully");
     }
 

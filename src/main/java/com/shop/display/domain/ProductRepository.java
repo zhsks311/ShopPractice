@@ -6,7 +6,8 @@ import java.util.Optional;
 public interface ProductRepository {
     List<Product> findLowestPriceByCategory();
 
-    List<Product> findProductsByBrandId(Brand brandId);
+    List<Product> findProductsByBrandId(Brand brand);
+    boolean isProductsExistByBrandId(Brand brand);
 
     Optional<Product> findLowestPriceProductByCategory(Category category);
 

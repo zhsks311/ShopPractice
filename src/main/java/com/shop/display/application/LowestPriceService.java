@@ -37,7 +37,7 @@ public class LowestPriceService {
         long totalPrice = products.stream()
                                   .map(Product::getPrice)
                                   .reduce(Long::sum)
-                         .orElse(0L);
+                                  .orElse(0L);
         return new CategoryLowestPriceWrapperResponse(responses, priceToStringWithComma(totalPrice));
     }
 
@@ -64,7 +64,8 @@ public class LowestPriceService {
                                   .orElse(0L);
         return new BrandLowestPriceResponse(BrandLowestPriceResponse.LowestPrice
                                                     .builder()
-                                                    .brand(products.get(0).getBrandName())
+                                                    .brand(products.get(0)
+                                                                   .getBrandName())
                                                     .categoryPrices(categoryPrices)
                                                     .totalAmount(priceToStringWithComma(totalPrice))
                                                     .build());

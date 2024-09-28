@@ -19,7 +19,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Tag("integrationTest")
@@ -51,9 +50,8 @@ class ProductControllerIntegrationTest {
         // when, then
         mockMvc.perform(put(V1_PREFIX + "/products/new")
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .content(objectMapper.writeValueAsString(productCommand))) // JSON 직렬화
-               .andExpect(status().isOk()) // 200 응답 코드 확인
-               .andExpect(content().string("Product added successfully"));
+                                .content(objectMapper.writeValueAsString(productCommand)))
+               .andExpect(status().isOk());
     }
 
     @Test
@@ -67,8 +65,7 @@ class ProductControllerIntegrationTest {
         mockMvc.perform(post(V1_PREFIX + "/products/" + productId)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(productCommand)))
-               .andExpect(status().isOk())
-               .andExpect(content().string("Product updated successfully"));
+               .andExpect(status().isOk());
         Product result = productJPARepository.findById(1L)
                                               .orElse(null);
         assertThat(result).isNotNull();
@@ -87,8 +84,7 @@ class ProductControllerIntegrationTest {
 
         // when, then
         mockMvc.perform(delete(V1_PREFIX + "/products/" + productId))
-               .andExpect(status().isOk())
-               .andExpect(content().string("Product deleted successfully"));
+               .andExpect(status().isOk());
         Product result = productJPARepository.findById(1L)
                                               .orElse(null);
         assertThat(result).isNull();

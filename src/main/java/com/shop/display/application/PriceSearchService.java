@@ -20,12 +20,15 @@ public class PriceSearchService {
         return toCategoryMinMaxResponse(highest.orElseThrow(), lowest.orElseThrow());
     }
 
-    private CategoryMinMaxResponse toCategoryMinMaxResponse(Product highest, Product lowest) {
+    private CategoryMinMaxResponse toCategoryMinMaxResponse(Product highest,
+                                                            Product lowest) {
         return CategoryMinMaxResponse.builder()
-                .category(highest.getCategory())
-                .highest(new CategoryMinMaxResponse.BrandProduct(highest.getBrandName(), highest.getPriceStringWithComma()))
-                .lowest(new CategoryMinMaxResponse.BrandProduct(lowest.getBrandName(), lowest.getPriceStringWithComma()))
-                .build();
+                                     .category(highest.getCategory())
+                                     .highest(new CategoryMinMaxResponse.BrandProduct(highest.getBrandName(),
+                                                                                      highest.getPriceStringWithComma()))
+                                     .lowest(new CategoryMinMaxResponse.BrandProduct(lowest.getBrandName(),
+                                                                                     lowest.getPriceStringWithComma()))
+                                     .build();
     }
 }
 

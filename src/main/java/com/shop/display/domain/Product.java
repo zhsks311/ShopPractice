@@ -27,7 +27,11 @@ import static com.shop.display.ProductUtils.priceToStringWithComma;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "product",
-       indexes = @Index(name = "idx_product_category_price_id", columnList = "category, price, id"))
+       indexes = {
+               @Index(name = "idx_product_brand_id", columnList = "brand_id"),
+               @Index(name = "idx_product_category_price", columnList = "category, price")
+       }
+)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

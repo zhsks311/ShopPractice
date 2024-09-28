@@ -33,10 +33,10 @@ public class ProductService {
                                      .orElseThrow(() -> new BadRequestException("Brand not found"));
 
         Product product = Product.builder()
-                                    .brand(brand)
-                                    .category(category)
-                                    .price(command.price())
-                                    .build();
+                                 .brand(brand)
+                                 .category(category)
+                                 .price(command.price())
+                                 .build();
 
         productRepository.save(product);
     }
@@ -64,7 +64,7 @@ public class ProductService {
     @Transactional
     public void delete(long id) {
         productRepository.findProduct(id)
-                .orElseThrow(() -> new BadRequestException("Product not found"));
+                         .orElseThrow(() -> new BadRequestException("Product not found"));
         productRepository.delete(id);
     }
 }

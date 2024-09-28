@@ -1,7 +1,8 @@
-package com.shop.display.infrastructure.jpa;
+package com.shop.display.infrastructure;
 
 import com.shop.display.domain.Brand;
 import com.shop.display.domain.BrandRepository;
+import com.shop.display.infrastructure.jpa.BrandJPARepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
@@ -28,6 +29,7 @@ public class BrandRepositoryImpl implements BrandRepository {
     public Optional<Brand> findBrandByName(String brandName) {
         return Optional.ofNullable(brandJPARepository.findByName(brandName));
     }
+
     @Override
     public Optional<Brand> findBrandById(long brandName) {
         return brandJPARepository.findById(brandName);
@@ -35,11 +37,13 @@ public class BrandRepositoryImpl implements BrandRepository {
 
     @Override
     public Brand save(String name) {
-        return brandJPARepository.save(Brand.builder().name(name).build());
+        return brandJPARepository.save(Brand.builder()
+                                            .name(name)
+                                            .build());
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(long id) throws RuntimeException {
         brandJPARepository.deleteById(id);
     }
 }

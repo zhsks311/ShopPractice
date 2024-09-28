@@ -22,6 +22,8 @@ public interface ProductJPARepository extends JpaRepository<Product, Long> {
 
     List<Product> findProductsByBrand(Brand brand);
 
+    boolean existsByBrand(Brand brand);
+
     Product findTopByCategoryOrderByPriceAsc(Category category);
 
     Product findTopByCategoryOrderByPriceDesc(Category category);

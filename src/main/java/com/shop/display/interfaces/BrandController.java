@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,7 +32,7 @@ public class BrandController {
         return lowestPriceService.findBrandLowestPrice();
     }
 
-    @PostMapping(V1_PREFIX + "/brands/new")
+    @PutMapping(V1_PREFIX + "/brands/new")
     public CUDResponse addBrand(@Valid @RequestBody BrandCommand command) {
         brandService.save(command);
         return new CUDResponse("Brand added successfully");

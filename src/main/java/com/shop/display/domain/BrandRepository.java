@@ -11,5 +11,5 @@ public interface BrandRepository {
 
     Brand save(String name);
 
-    void delete(long id);
+    void delete(long id) throws RuntimeException;
 }
