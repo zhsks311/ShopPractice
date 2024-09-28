@@ -1,12 +1,14 @@
 package com.shop.display.infrastructure;
 
 import com.shop.display.domain.Brand;
+import com.shop.display.domain.Category;
 import com.shop.display.domain.Product;
 import com.shop.display.domain.ProductRepository;
 import com.shop.display.infrastructure.jpa.ProductJPARepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
@@ -24,6 +26,16 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public List<Product> findProductsByBrandId(Brand brand) {
         return productJPARepository.findProductsByBrand(brand);
+    }
+
+    @Override
+    public Optional<Product> findLowestPriceProductByCategory(Category category) {
+        return Optional.ofNullable(productJPARepository.findTopByCategoryOrderByPriceAsc(category));
+    }
+
+    @Override
+    public Optional<Product> findHighestPriceProductByCategory(Category category) {
+        return Optional.ofNullable(productJPARepository.findTopByCategoryOrderByPriceDesc(category));
     }
 
 }
