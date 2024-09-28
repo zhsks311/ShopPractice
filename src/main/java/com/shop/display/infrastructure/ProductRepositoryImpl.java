@@ -1,5 +1,6 @@
 package com.shop.display.infrastructure;
 
+import com.shop.display.domain.Brand;
 import com.shop.display.domain.Product;
 import com.shop.display.domain.ProductRepository;
 import com.shop.display.infrastructure.jpa.ProductJPARepository;
@@ -18,6 +19,11 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public List<Product> findLowestPriceByCategory() {
         return productJPARepository.findCategoryLowestPrices();
+    }
+
+    @Override
+    public List<Product> findProductsByBrandId(Brand brand) {
+        return productJPARepository.findProductsByBrand(brand);
     }
 
 }

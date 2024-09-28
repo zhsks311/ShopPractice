@@ -1,6 +1,7 @@
 package com.shop.display.infrastructure.jpa;
 
 
+import com.shop.display.domain.Brand;
 import com.shop.display.domain.Product;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -50,5 +51,20 @@ class ProductJPARepositoryIntegrationTest {
                   () -> assertThat(categoryMap.get(SOCKS).getPrice()).isEqualTo(1700),
                   () -> assertThat(categoryMap.get(ACCESSORIES).getPrice()).isEqualTo(1900)
                   );
+    }
+    @Test
+    void findLowestTotalPriceBrand() {
+        // given
+        long magicNumber = 1L;
+        Brand brand = Brand.builder()
+                           .id(magicNumber)
+                           .build();
+
+        // when
+        var result = productJPARepository.findProductsByBrand(brand);
+
+        // then
+        assertThat(result).isNotNull();
+        assertThat(result).isNotEmpty();
     }
 }
