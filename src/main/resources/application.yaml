@@ -3,15 +3,15 @@ spring:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:display
     username: sa
-    password: password
   h2:
     console:
       enabled: true
       path: /h2-console
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
