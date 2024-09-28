@@ -3,6 +3,7 @@ package com.shop.display.application;
 import com.shop.display.domain.BrandRepository;
 import com.shop.display.domain.Product;
 import com.shop.display.domain.ProductRepository;
+import com.shop.display.interfaces.exception.BadRequestException;
 import com.shop.display.interfaces.model.BrandLowestPriceResponse;
 import com.shop.display.interfaces.model.CategoryLowestPriceWrapperResponse;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,7 @@ public class LowestPriceService {
 
     public BrandLowestPriceResponse findBrandLowestPrice() {
         var lowestPriceBrand = brandRepository.findLowestPriceBrand()
-                                              .orElseThrow(() -> new RuntimeException("No brand found"));
+                                              .orElseThrow(() -> new BadRequestException("No brand found"));
         var lowestTotalPriceBrand = productRepository.findProductsByBrandId(lowestPriceBrand);
 
         return mapToBrandLowestPriceResponse(lowestTotalPriceBrand);
@@ -50,7 +51,7 @@ public class LowestPriceService {
 
     private BrandLowestPriceResponse mapToBrandLowestPriceResponse(List<Product> products) {
         if (products.isEmpty()) {
-            throw new RuntimeException("No product found");
+            throw new BadRequestException("No product found");
         }
         var categoryPrices
                 = products.stream()

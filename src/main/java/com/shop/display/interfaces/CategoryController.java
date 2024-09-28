@@ -3,6 +3,7 @@ package com.shop.display.interfaces;
 import com.shop.display.application.LowestPriceService;
 import com.shop.display.application.PriceSearchService;
 import com.shop.display.domain.Category;
+import com.shop.display.interfaces.exception.BadRequestException;
 import com.shop.display.interfaces.model.CategoryLowestPriceWrapperResponse;
 import com.shop.display.interfaces.model.CategoryMinMaxResponse;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +33,7 @@ public class CategoryController {
         try {
             category = Category.valueOf(categoryName.toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Invalid category name");
+            throw new BadRequestException("Invalid category name");
         }
         return priceSearchService.findCategoryRange(category);
     }
