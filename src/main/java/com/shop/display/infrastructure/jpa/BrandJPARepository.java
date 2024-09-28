@@ -15,4 +15,5 @@ public interface BrandJPARepository extends JpaRepository<Brand, Long> {
                  ORDER BY SUM(p.price) ASC
     """)
     List<Brand> findLowestPriceBrand(Pageable pageable);
+    Brand findByName(String name);
 }
